@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: myapp-blue         # deployment 의 이름
 spec:                 # 여기부터 rs
-  replicas: 3         # Pod 를 3개 띄우겠다! (min)
+  replicas: 6         # Pod 를 3개 띄우겠다! (min)
   selector:
     matchLabels:
       color: blue
@@ -27,21 +27,16 @@ spec:                 # 여기부터 rs
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp-green         # deployment 의 이름
+  name: myapp-shop        # deployment 의 이름
 spec:                 # 여기부터 rs
   replicas: 3         # Pod 를 3개 띄우겠다! (min)
-  selector:
-    matchLabels:
-      color: green
   template:           # 여기부터 Pod
     metadata:
-      name: mynginx-green   # pod 의 이름
-      labels:
-        color: green
+      name: mynginx-shop   # pod 의 이름
     spec:             # 여기부터 컨테이너
       containers:
-      - name: mynginxctn-green    # 컨테이너의 이름
-        image: brian24/kakaodev:green
+      - name: mynginxctn-shop    # 컨테이너의 이름
+        image: brian24/kakaodev:shop
         resources:
           limits:
             memory: "32Mi"
@@ -49,7 +44,7 @@ spec:                 # 여기부터 rs
         ports:
         - containerPort: 80
 
-—
+---
 apiVersion: v1
 kind: Service
 metadata:
